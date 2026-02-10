@@ -1,0 +1,25 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# IntelliJ
+.idea/
+*.iml
+out/
+*.iws
+
+# Maven
+target/
+
+# Gradle
+.gradle/
+build/
+gradlew
+gradlew.bat
+gradle/**
+gradle.properties
+
+
+# OS
+.DS_Store
+Thumbs.db
