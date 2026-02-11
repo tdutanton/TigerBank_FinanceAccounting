@@ -1,8 +1,16 @@
 package Utils.Logging;
 
-public class ConsoleLogger implements Logger {
+public final class ConsoleLogger implements Logger {
+    private static boolean logging = false;
+
+    public void setLogMode(boolean state) {
+        logging = state;
+    }
+
     @Override
     public void info(String message, String id) {
-        System.out.printf(message);
+        if (logging) {
+            System.out.printf(message);
+        }
     }
 }
