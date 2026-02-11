@@ -9,7 +9,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class Category {
-    private final Integer id;
+    private final String id;
     private final TxType type;
     private final String name;
 }

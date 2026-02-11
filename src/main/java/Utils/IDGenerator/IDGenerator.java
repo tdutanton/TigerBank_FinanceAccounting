@@ -1,5 +1,5 @@
 package Utils.IDGenerator;
 
 public interface IDGenerator {
-    Integer nextId();
+    String nextId();
 }

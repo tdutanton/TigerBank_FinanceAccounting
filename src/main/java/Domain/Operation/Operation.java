@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @ToString
 public class Operation {
-    private final Integer id;
+    private final String id;
     private final TxType type;
     private final Integer bankAccountId;
     private long amount;
@@ -19,7 +19,7 @@ public class Operation {
     private final Integer categoryId;
     private String description;
 
-    public Operation(Integer id, TxType type, Integer bankAccountId, long amount, LocalDateTime date, Integer categoryId) {
+    public Operation(String id, TxType type, Integer bankAccountId, long amount, LocalDateTime date, Integer categoryId) {
         this.id = id;
         this.type = type;
         this.bankAccountId = bankAccountId;

@@ -8,7 +8,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class BankAccount {
-    private final Integer id;
+    private final String id;
     private String name;
     private long balance;
 }
