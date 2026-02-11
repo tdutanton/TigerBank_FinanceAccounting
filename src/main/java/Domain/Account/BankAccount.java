@@ -1,30 +1,57 @@
 package Domain.Account;
 
-import lombok.AllArgsConstructor;
+import Domain.Operation.OperationResult;
+import Domain.Operation.Results;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @ToString(includeFieldNames=true)
-public class BankAccount {
-    @Getter
-    private final String id;
-    private String name;
-    private long balance;
-
+public final class BankAccount extends Account implements Withdrawable, Depositable{
     public BankAccount(String id, String name, long balance) {
-        if (id == null || id.isEmpty()) {
-            throw new IllegalArgumentException("ID счета не может быть null или пустым");
+        super(id, name, balance);
+    }
+
+    public BankAccount(String id, String name) {
+        super(id, name);
+    }
+
+    @Override
+    public OperationResult withdraw(long amount) {
+        if (!isAmountCorrect(amount)) {
+            return Results.failure("Сумма снятия должна быть положительной");
         }
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Имя счета не может быть null или пустым");
+        if (!isWithdrawPossible(amount)) {
+            return Results.failure("Недостаточно средств на счёте");
         }
-        if (balance < 0) {
-            throw new IllegalArgumentException("Баланс не может быть отрицательным");
+        this.balance -= amount;
+        return Results.success();
+    }
+
+    @Override
+    public OperationResult deposit(long amount) {
+        if (!isAmountCorrect(amount)) {
+            return Results.failure("Сумма депозита должна быть корректной");
         }
-        this.id = id;
-        this.name = name;
-        this.balance = balance;
+        this.balance += amount;
+        return Results.success();
+    }
+
+    private boolean isAmountCorrect(long amount) {
+        return amount >= 0;
+    }
+
+    private boolean isWithdrawPossible(long amount) {
+        return this.balance >= amount;
+    }
+
+    @Override
+    Account withName(String newName) {
+        return new BankAccount(getId(), newName, this.balance);
+    }
+
+    @Override
+    Account withBalance(long newBalance) {
+        return new BankAccount(getId(), this.name, newBalance);
     }
 }

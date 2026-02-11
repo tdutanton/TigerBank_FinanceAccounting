@@ -7,7 +7,6 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
 @EqualsAndHashCode
 @ToString(includeFieldNames = true)
 public class Operation {
@@ -23,7 +22,7 @@ public class Operation {
         if (id == null || id.isEmpty()) {
             throw new IllegalArgumentException("ID Operation не может быть null или пустым");
         }
-        if (type == null || type.trim().isEmpty()) {
+        if (type == null) {
             throw new IllegalArgumentException("Тип не может быть null или пустым");
         }
         if (bankAccountId == null || bankAccountId.isEmpty()) {
@@ -56,7 +55,7 @@ public class Operation {
         if (id == null || id.isEmpty()) {
             throw new IllegalArgumentException("ID Operation не может быть null или пустым");
         }
-        if (type == null || type.trim().isEmpty()) {
+        if (type == null) {
             throw new IllegalArgumentException("Тип не может быть null или пустым");
         }
         if (bankAccountId == null || bankAccountId.isEmpty()) {

@@ -8,7 +8,7 @@ public final class ConsoleLogger implements Logger {
     }
 
     @Override
-    public void info(String message, String id) {
+    public void info(String message) {
         if (logging) {
             System.out.printf(message);
         }

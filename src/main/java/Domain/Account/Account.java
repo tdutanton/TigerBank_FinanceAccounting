@@ -1,0 +1,44 @@
+package Domain.Account;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
+@EqualsAndHashCode
+@ToString(includeFieldNames=true)
+public abstract class Account {
+    @Getter
+    protected final String id;
+    protected String name;
+    protected long balance;
+
+    public Account(String id, String name, long balance) {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("ID счета не может быть null или пустым");
+        }
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Имя счета не может быть null или пустым");
+        }
+        if (balance < 0) {
+            throw new IllegalArgumentException("Баланс не может быть отрицательным");
+        }
+        this.id = id;
+        this.name = name;
+        this.balance = balance;
+    }
+
+    public Account(String id, String name) {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("ID счета не может быть null или пустым");
+        }
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Имя счета не может быть null или пустым");
+        }
+        this.id = id;
+        this.name = name;
+        this.balance = 0;
+    }
+
+    abstract Account withName(String newName);
+    abstract Account withBalance(long newBalance);
+}
