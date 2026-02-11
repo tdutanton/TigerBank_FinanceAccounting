@@ -1,4 +1,4 @@
-package Logging;
+package Utils.Logging;
 
 public class ConsoleLogger implements Logger {
     @Override

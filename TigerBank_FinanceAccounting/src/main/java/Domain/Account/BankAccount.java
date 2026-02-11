@@ -10,5 +10,5 @@ import lombok.ToString;
 public class BankAccount {
     private final Integer id;
     private String name;
-    private long amount;
+    private long balance;
 }

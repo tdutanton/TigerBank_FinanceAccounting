@@ -1,4 +1,6 @@
-package Domain.TxType;
+package Presentation;
+import Domain.TxType.TxType;
+
 import java.util.Map;
 
 public class TxTypeDisplay {

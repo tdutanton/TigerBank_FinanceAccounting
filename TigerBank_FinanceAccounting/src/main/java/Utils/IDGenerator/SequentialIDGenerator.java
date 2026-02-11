@@ -1,4 +1,4 @@
-package Utils;
+package Utils.IDGenerator;
 
 public class SequentialIDGenerator implements IDGenerator {
     private int current = 1;
