@@ -1,12 +1,13 @@
 package Domain.Account;
 
+import Domain.Identifiable.Identifiable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
 @EqualsAndHashCode
 @ToString(includeFieldNames=true)
-public abstract class Account {
+public abstract class Account implements Identifiable {
     @Getter
     protected final String id;
     protected String name;

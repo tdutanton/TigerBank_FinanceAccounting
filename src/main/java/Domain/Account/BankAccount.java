@@ -1,5 +1,6 @@
 package Domain.Account;
 
+import Domain.Identifiable.Identifiable;
 import Domain.Operation.OperationResult;
 import Domain.Operation.Results;
 import lombok.EqualsAndHashCode;
@@ -7,7 +8,7 @@ import lombok.ToString;
 
 @EqualsAndHashCode(callSuper = false)
 @ToString(includeFieldNames=true)
-public final class BankAccount extends Account implements Withdrawable, Depositable{
+public final class BankAccount extends Account implements Withdrawable, Depositable, Identifiable {
     public BankAccount(String id, String name, long balance) {
         super(id, name, balance);
     }

@@ -12,6 +12,13 @@ import java.util.Objects;
  * String - id счета
  */
 @Component
+public class AccountRepository extends BaseRepository<Account> {
+    public AccountRepository(Logger logger) {
+        super(logger);
+    }
+}
+
+/*@Component
 public class AccountRepository {
     private final Map<String, Account> accounts;
     private final Logger logger;
@@ -32,10 +39,10 @@ public class AccountRepository {
     private void safetyAddAccount(Account account) {
         if (!isInRepository(account)) {
             accounts.put(account.getId(), account);
-            logger.info("Сохранен счет в репозиторий: %n");
+            logger.info("Сохранен счет в репозиторий: " + account.getId());
             return;
         }
-        logger.info("Счет %s уже существует в хранилище.%n");
+        logger.info("Счет " + account.getId() + " уже существует в хранилище");
     }
 
     public void addAccount(Account account) {
@@ -45,10 +52,10 @@ public class AccountRepository {
     private void safetyDeleteAccount(Account account) {
         if (isInRepository(account)) {
             accounts.remove(account.getId());
-            logger.info("Удален счет из репозитория: %n");
+            logger.info("Удален счет из репозитория: " + account.getId());
             return;
         }
-        logger.info("Счет %s не существует в хранилище.%n");
+        logger.info("Счет " + account.getId() + " не существует в хранилище");
     }
 
     public void deleteAccount(Account account) {
@@ -58,10 +65,10 @@ public class AccountRepository {
     public void safetyUpdateAccount(Account account) {
         if (isInRepository(account)) {
             accounts.put(account.getId(), account);
-            logger.info("Обновлен (изменен) счет в репозитории: %n");
+            logger.info("Обновлен (изменен) счет в репозитории: " + account.getId());
             return;
         }
-        logger.info("Счет %s не существует в хранилище.%n");
+        logger.info("Счет " + account.getId() + " не существует в хранилище");
     }
 
     public void updateAccount(Account account) {
@@ -69,7 +76,7 @@ public class AccountRepository {
     }
 
     public Account accountById(String id) {
-        Objects.requireNonNull(id, "Счета с таким id не существует");
+        Objects.requireNonNull(id, "Счета с id " + id + " не существует");
         return accounts.get(id);
     }
-}
+}*/

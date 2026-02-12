@@ -10,7 +10,7 @@ public final class ConsoleLogger implements Logger {
     @Override
     public void info(String message) {
         if (logging) {
-            System.out.printf(message);
+            System.out.println(message);
         }
     }
 }

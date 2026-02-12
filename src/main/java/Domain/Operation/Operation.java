@@ -1,15 +1,18 @@
 package Domain.Operation;
 
+import Domain.Identifiable.Identifiable;
 import Domain.TxType.TxType;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode
 @ToString(includeFieldNames = true)
-public class Operation {
+public class Operation implements Identifiable {
+    @Getter
     private final String id;
     private final TxType type;
     private final String bankAccountId;
