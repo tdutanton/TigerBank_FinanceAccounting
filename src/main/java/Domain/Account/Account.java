@@ -11,6 +11,7 @@ public abstract class Account implements Identifiable {
     @Getter
     protected final String id;
     protected String name;
+    @Getter
     protected long balance;
 
     public Account(String id, String name, long balance) {
@@ -39,7 +40,4 @@ public abstract class Account implements Identifiable {
         this.name = name;
         this.balance = 0;
     }
-
-    abstract Account withName(String newName);
-    abstract Account withBalance(long newBalance);
 }

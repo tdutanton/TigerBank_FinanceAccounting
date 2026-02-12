@@ -42,5 +42,4 @@ public abstract class BaseRepository<T extends Identifiable> {
     }
 
     protected abstract void safetyUpdate(T entity);
-
 }

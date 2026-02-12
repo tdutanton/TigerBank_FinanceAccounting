@@ -18,41 +18,12 @@ public final class BankAccount extends Account implements Withdrawable, Deposita
     }
 
     @Override
-    public OperationResult withdraw(long amount) {
-        if (!isAmountCorrect(amount)) {
-            return Results.failure("Сумма снятия должна быть положительной");
-        }
-        if (!isWithdrawPossible(amount)) {
-            return Results.failure("Недостаточно средств на счёте");
-        }
+    public void withdraw(long amount) {
         this.balance -= amount;
-        return Results.success();
     }
 
     @Override
-    public OperationResult deposit(long amount) {
-        if (!isAmountCorrect(amount)) {
-            return Results.failure("Сумма депозита должна быть корректной");
-        }
+    public void deposit(long amount) {
         this.balance += amount;
-        return Results.success();
-    }
-
-    private boolean isAmountCorrect(long amount) {
-        return amount >= 0;
-    }
-
-    private boolean isWithdrawPossible(long amount) {
-        return this.balance >= amount;
-    }
-
-    @Override
-    Account withName(String newName) {
-        return new BankAccount(getId(), newName, this.balance);
-    }
-
-    @Override
-    Account withBalance(long newBalance) {
-        return new BankAccount(getId(), this.name, newBalance);
     }
 }
