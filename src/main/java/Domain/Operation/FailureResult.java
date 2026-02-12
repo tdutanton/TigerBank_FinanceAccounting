@@ -1,19 +1,9 @@
 package Domain.Operation;
 
-public final class FailureResult implements OperationResult {
-    private final String message;
+public record FailureResult(String message) implements OperationResult {
 
-    public FailureResult(String message) {
-        this.message = message;
-    }
-
-    @Override
-    public boolean isSuccess() {
-        return false;
-    }
-
-    @Override
-    public String message() {
-        return message;
-    }
+  @Override
+  public boolean isSuccess() {
+    return false;
+  }
 }

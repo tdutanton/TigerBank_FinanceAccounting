@@ -1,5 +1,6 @@
 package Domain.Account;
 
 public interface Depositable {
-    void deposit(long amount);
+
+  void deposit(long amount);
 }
