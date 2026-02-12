@@ -7,6 +7,8 @@ import Utils.Logging.Logger;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class AccountService {
@@ -16,7 +18,7 @@ public class AccountService {
     public void createAndSaveBankAccount(String id, String name, long balance) {
         try {
             BankAccount account = new BankAccount(id, name, balance);
-            repository.addAccount(account);
+            repository.add(account);
         } catch (IllegalArgumentException e) {
             logger.info(e.toString());
         }
@@ -25,16 +27,14 @@ public class AccountService {
     public void createAndSaveBankAccount(String id, String name) {
         try {
             BankAccount account = new BankAccount(id, name);
-            repository.addAccount(account);
+            repository.add(account);
         } catch (IllegalArgumentException e) {
             logger.info(e.toString());
         }
     }
 
     public void deleteBankAccount(String id) {
-        Account account = repository.accountById(id);
-        if (account != null) {
-            repository.deleteAccount(repository.accountById(id));
-        }
+        Optional<Account> account = repository.findByKey(id);
+        account.ifPresent(repository::delete);
     }
 }

@@ -13,6 +13,7 @@ public class Category implements Identifiable {
     @Getter
     private final String id;
     private final TxType type;
+    @Getter
     private final String name;
 
     public Category(String id, TxType type, String name) {

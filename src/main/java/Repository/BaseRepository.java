@@ -15,36 +15,32 @@ public abstract class BaseRepository<T extends Identifiable> {
         this.logger = logger;
     }
 
+    public Optional<T> findByKey(String key) {
+        return Optional.ofNullable(storage.get(key));
+    }
+
+    public boolean exists(String key) {
+        return storage.containsKey(key);
+    }
+
+    public abstract boolean exists(T entity);
+
     public void add(T entity) {
-        String id = entity.getId();
-        if (storage.containsKey(id)) {
-//            logger.info("Сущность %s уже существует в хранилище.%n", id);
-            return;
-        }
-        storage.put(id, entity);
-//        logger.info("Сохранена сущность: %s%n", id);
+        safetyAdd(entity);
     }
 
-    public Optional<T> findById(String id) {
-        return Optional.ofNullable(storage.get(id));
+    protected abstract void safetyAdd(T entity);
+
+    public void delete(T entity) {
+        safetyDelete(entity);
     }
 
-    public boolean exists(String id) {
-        return storage.containsKey(id);
+    protected abstract void safetyDelete(T entity);
+
+    public void update(T entity) {
+        safetyUpdate(entity);
     }
 
-    public boolean exists(T entity) {
-        return exists(entity.getId());
-    }
+    protected abstract void safetyUpdate(T entity);
 
-    public Iterable<T> findAll() {
-        return storage.values();
-    }
-
-    public void remove(String id) {
-        if (storage.containsKey(id)) {
-            storage.remove(id);
-//            logger.info("Сущность %s удалена.%n", id);
-        }
-    }
 }
