@@ -58,8 +58,8 @@ public class AccountService {
       return Results.failure("Недостаточно средств на счёте");
     }
     account.withdraw(amount);
-    repository.update((Account) account);
     logger.info("Со счета снята сумма: " + amount / 100.0);
+    repository.update((Account) account);
     return Results.success();
   }
 
@@ -76,8 +76,8 @@ public class AccountService {
       return Results.failure("Сумма депозита должна быть корректной");
     }
     account.deposit(amount);
-    repository.update((Account) account);
     logger.info("Счет пополнен на сумму: " + amount / 100.0);
+    repository.update((Account) account);
     return Results.success();
   }
 
