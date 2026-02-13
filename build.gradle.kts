@@ -8,7 +8,6 @@ plugins {
 java {
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
-
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
@@ -22,19 +21,14 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
     implementation("org.springframework.boot:spring-boot-starter")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testCompileOnly("org.projectlombok:lombok")
     testAnnotationProcessor("org.projectlombok:lombok")
 }
@@ -42,8 +36,6 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
     systemProperty("file.encoding", "UTF-8")
-    jvmArgs("-Dfile.encoding=UTF-8")
-
     finalizedBy(tasks.jacocoTestReport)
     testLogging {
         events("passed", "failed", "skipped")
@@ -69,17 +61,10 @@ tasks.bootRun {
 }
 
 springBoot {
-    mainClass = "TigerBankApplication"
-}
-
-tasks.withType<org.gradle.api.tasks.compile.JavaCompile> {
-    options.compilerArgs.add("-Xlint:-deprecation")
-}
-
-tasks.withType<JavaExec> {
-    systemProperty("file.encoding", "UTF-8")
+    mainClass = "TigerBank.TigerBankApplication"
 }
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
+    options.compilerArgs.add("-Xlint:-deprecation")
 }

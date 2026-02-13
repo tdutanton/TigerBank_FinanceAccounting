@@ -1,0 +1,53 @@
+package TigerBank.Service;
+
+import TigerBank.Domain.Operation.Operation;
+import TigerBank.Domain.TxType.TxType;
+import TigerBank.Repository.OperationRepository;
+import TigerBank.Utils.Logging.Logger;
+import java.time.LocalDateTime;
+import java.util.Optional;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@AllArgsConstructor
+public class OperationService {
+
+  private final OperationRepository repository;
+  private final Logger logger;
+
+  public void createAndSaveOperation(String id,
+      TxType type,
+      String bankAccountId,
+      long amount,
+      LocalDateTime date,
+      String categoryId,
+      String description) {
+    try {
+      Operation operation = new Operation(id, type, bankAccountId, amount, date, categoryId,
+          description);
+      repository.add(operation);
+    } catch (IllegalArgumentException e) {
+      logger.info(e.toString());
+    }
+  }
+
+  public void createAndSaveOperation(String id,
+      TxType type,
+      String bankAccountId,
+      long amount,
+      LocalDateTime date,
+      String categoryId) {
+    try {
+      Operation operation = new Operation(id, type, bankAccountId, amount, date, categoryId);
+      repository.add(operation);
+    } catch (IllegalArgumentException e) {
+      logger.info(e.toString());
+    }
+  }
+
+  public void deleteOperation(String id) {
+    Optional<Operation> operation = repository.findByKey(id);
+    operation.ifPresent(repository::delete);
+  }
+}
