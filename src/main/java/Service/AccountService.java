@@ -21,7 +21,7 @@ public class AccountService {
 
   public void createAndSaveBankAccount(String id, String name, long balance) {
     try {
-      BankAccount account = new BankAccount(id, name, balance);
+      Account account = new BankAccount(id, name, balance);
       repository.add(account);
     } catch (IllegalArgumentException e) {
       logger.info(e.toString());
@@ -30,7 +30,7 @@ public class AccountService {
 
   public void createAndSaveBankAccount(String id, String name) {
     try {
-      BankAccount account = new BankAccount(id, name);
+      Account account = new BankAccount(id, name);
       repository.add(account);
     } catch (IllegalArgumentException e) {
       logger.info(e.toString());

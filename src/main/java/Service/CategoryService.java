@@ -28,4 +28,16 @@ public class CategoryService {
     Optional<Category> category = repository.findByKey(name);
     category.ifPresent(repository::delete);
   }
+
+  public String categoryId(String name) {
+    return repository.findByKey(name)
+        .map(Category::getId)
+        .orElse(null);
+  }
+
+  public boolean exists(String name) {
+    return repository.findByKey(name)
+        .map(repository::exists)
+        .orElse(false);
+  }
 }

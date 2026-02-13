@@ -5,6 +5,7 @@ import Domain.TxType.TxType;
 import Repository.OperationRepository;
 import Utils.Logging.Logger;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +44,10 @@ public class OperationService {
     } catch (IllegalArgumentException e) {
       logger.info(e.toString());
     }
+  }
+
+  public void deleteOperation(String id) {
+    Optional<Operation> operation = repository.findByKey(id);
+    operation.ifPresent(repository::delete);
   }
 }
