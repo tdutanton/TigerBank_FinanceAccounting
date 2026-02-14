@@ -11,12 +11,14 @@ import TigerBank.Utils.Logging.Logger;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class OperationService {
 
+  @Getter
   private final OperationRepository repository;
   private final Logger logger;
 

@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @EqualsAndHashCode(callSuper = false)
-@ToString(includeFieldNames = true)
+@ToString(callSuper = true, includeFieldNames = true)
 public final class BankAccount extends Account implements Withdrawable, Depositable, Identifiable {
 
   public BankAccount(String id, String name, long balance) {

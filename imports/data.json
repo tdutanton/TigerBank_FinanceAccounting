@@ -1,0 +1,27 @@
+{
+  "accounts": [
+    {
+      "id": "acc_123",
+      "name": "Основной счет",
+      "balance": 10000
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat_1",
+      "type": "EXPENSE",
+      "name": "Продукты"
+    }
+  ],
+  "operations": [
+    {
+      "id": "op_1",
+      "type": "EXPENSE",
+      "bankAccountId": "acc_123",
+      "amount": 500,
+      "date": "2026-02-14T15:30:00",
+      "categoryId": "cat_1",
+      "description": "Закупка продуктов"
+    }
+  ]
+}

@@ -10,12 +10,14 @@ import TigerBank.Repository.AccountRepository;
 import TigerBank.Utils.Logging.Logger;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class AccountService {
 
+  @Getter
   private final AccountRepository repository;
   private final Logger logger;
 

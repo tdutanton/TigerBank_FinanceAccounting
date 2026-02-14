@@ -6,14 +6,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+@Getter
 @EqualsAndHashCode
 @ToString(includeFieldNames = true)
 public class Category implements Identifiable {
 
-  @Getter
   private final String id;
   private final TxType type;
-  @Getter
   private final String name;
 
   public Category(String id, TxType type, String name) {

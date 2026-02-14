@@ -5,14 +5,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+@Getter
 @EqualsAndHashCode
 @ToString(includeFieldNames = true)
 public abstract class Account implements Identifiable {
 
-  @Getter
   protected final String id;
   protected String name;
-  @Getter
   protected long balance;
 
   public Account(String id, String name, long balance) {

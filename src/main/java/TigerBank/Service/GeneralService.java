@@ -1,9 +1,15 @@
 package TigerBank.Service;
 
+import TigerBank.Analytics.MoneyGroup.Summary;
+import TigerBank.Analytics.MoneySum;
+import TigerBank.Domain.Account.Account;
+import TigerBank.Domain.Category.Category;
+import TigerBank.Domain.Operation.Operation;
 import TigerBank.Domain.TxType.TxType;
 import TigerBank.Utils.IDGenerator.IDGenerator;
 import TigerBank.Utils.Logging.Logger;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -116,5 +122,25 @@ public class GeneralService {
     } else {
       logger.info("Снятие не удалось. В хранилище отсутствует указанная категория");
     }
+  }
+
+  public ArrayList<Account> accounts() {
+    return accountService.getRepository().entities();
+  }
+
+  public ArrayList<Category> categories() {
+    return categoryService.getRepository().entities();
+  }
+
+  public ArrayList<Operation> operations() {
+    return operationService.getRepository().entities();
+  }
+
+  public MoneySum calculateDifferenceBetweenThreads(LocalDateTime start, LocalDateTime end) {
+    return operationService.calculateDifferenceBetweenThreads(start, end);
+  }
+
+  public Summary calculateMoneyGroup() {
+    return operationService.calculateMoneyGroup();
   }
 }

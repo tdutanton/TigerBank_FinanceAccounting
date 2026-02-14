@@ -1,0 +1,11 @@
+# ACCOUNTS
+id,name,balance
+acc_123,Основной счет,10000
+
+# CATEGORIES
+id,type,name
+cat_1,EXPENSE,Продукты
+
+# OPERATIONS
+id,type,bankAccountId,amount,date,categoryId,description
+op_1,EXPENSE,acc_123,500,2026-02-14T15:30:00,cat_1,"Закупка продуктов"

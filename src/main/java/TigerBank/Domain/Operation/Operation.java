@@ -7,20 +7,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+@Getter
 @EqualsAndHashCode
 @ToString(includeFieldNames = true)
 public class Operation implements Identifiable {
 
-  @Getter
   private final String id;
-  @Getter
   private final TxType type;
   private final String bankAccountId;
-  @Getter
   private final LocalDateTime date;
-  @Getter
   private final String categoryId;
-  @Getter
   private final long amount;
   private final String description;
 
