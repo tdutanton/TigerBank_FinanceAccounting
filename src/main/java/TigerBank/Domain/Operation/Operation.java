@@ -13,10 +13,13 @@ public class Operation implements Identifiable {
 
   @Getter
   private final String id;
+  @Getter
   private final TxType type;
   private final String bankAccountId;
+  @Getter
   private final LocalDateTime date;
   private final String categoryId;
+  @Getter
   private final long amount;
   private final String description;
 
