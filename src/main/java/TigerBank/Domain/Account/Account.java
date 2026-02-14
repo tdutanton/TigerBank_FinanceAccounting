@@ -5,6 +5,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+/**
+ * Абстрактный базовый класс банковского счёта. Предоставляет общую функциональность для всех типов
+ * счетов: уникальный идентификатор, наименование и баланс. Является неизменяемым по
+ * идентификатору.
+ */
 @Getter
 @EqualsAndHashCode
 @ToString(includeFieldNames = true)

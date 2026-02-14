@@ -5,7 +5,7 @@ import TigerBank.Utils.Logging.Logger;
 import org.springframework.stereotype.Component;
 
 /**
- * String - id операции
+ * Хранилище операций. String - id операции
  */
 @Component
 public class OperationRepository extends BaseRepository<Operation> {

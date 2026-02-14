@@ -4,6 +4,9 @@ import TigerBank.Domain.Identifiable.Identifiable;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+/**
+ * Наследник абстрактного аккаунта
+ */
 @EqualsAndHashCode(callSuper = false)
 @ToString(callSuper = true, includeFieldNames = true)
 public final class BankAccount extends Account implements Withdrawable, Depositable, Identifiable {

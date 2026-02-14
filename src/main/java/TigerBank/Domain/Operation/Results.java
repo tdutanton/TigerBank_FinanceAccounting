@@ -1,5 +1,8 @@
 package TigerBank.Domain.Operation;
 
+/**
+ * Класс для возврата результатов банковских операций
+ */
 public final class Results {
 
   private Results() {

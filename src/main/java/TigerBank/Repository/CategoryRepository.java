@@ -5,7 +5,7 @@ import TigerBank.Utils.Logging.Logger;
 import org.springframework.stereotype.Component;
 
 /**
- * String - название категории
+ * Хранилище категорий. String - название категории
  */
 @Component
 public class CategoryRepository extends BaseRepository<Category> {

@@ -5,7 +5,7 @@ import TigerBank.Utils.Logging.Logger;
 import org.springframework.stereotype.Component;
 
 /**
- * String - id счета
+ * Хранилище счетов. String - id счета
  */
 @Component
 public class AccountRepository extends BaseRepository<Account> {

@@ -6,6 +6,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+/**
+ * Категория банковской операции
+ */
 @Getter
 @EqualsAndHashCode
 @ToString(includeFieldNames = true)

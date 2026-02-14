@@ -8,6 +8,11 @@ import java.util.Map;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
+/**
+ * Абстрактный класс для хранения различных сущностей, удовлетворяющих интерфейсу Identifiable
+ *
+ * @param <T>
+ */
 @Component
 public abstract class BaseRepository<T extends Identifiable> {
 

@@ -7,6 +7,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+/**
+ * Класс банковской операции
+ */
 @Getter
 @EqualsAndHashCode
 @ToString(includeFieldNames = true)
