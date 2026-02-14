@@ -18,6 +18,7 @@ public class Operation implements Identifiable {
   private final String bankAccountId;
   @Getter
   private final LocalDateTime date;
+  @Getter
   private final String categoryId;
   @Getter
   private final long amount;

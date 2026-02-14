@@ -22,7 +22,7 @@ public class MoneyGroup implements Calculatable {
     result.clear();
 
     for (Operation operation : operations) {
-      String categoryId = operation.getId();
+      String categoryId = operation.getCategoryId();
       CategorySummary summary = result.computeIfAbsent(
           categoryId,
           id -> new CategorySummary(id, 0L, 0L)
@@ -41,12 +41,7 @@ public class MoneyGroup implements Calculatable {
     return new Summary(totalIncome, totalExpense);
   }
 
-  @Getter
-  @AllArgsConstructor
-  public static class Summary {
-
-    private final long totalIncome;
-    private final long totalExpense;
+  public record Summary(long totalIncome, long totalExpense) {
 
     public long getNet() {
       return totalIncome - totalExpense;

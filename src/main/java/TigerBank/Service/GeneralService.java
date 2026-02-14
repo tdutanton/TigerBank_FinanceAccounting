@@ -66,43 +66,55 @@ public class GeneralService {
   }
 
   public void depositToAccount(String accId, long amount, String categoryName) {
-    if (accountService.depositById(accId, amount).isSuccess() && categoryService.exists(
-        categoryName)) {
-      createAndSaveOperation(operationIdGenerator.nextId(), TxType.INCOME, accId, amount,
-          LocalDateTime.now(), categoryService.categoryId(categoryName));
+    if (categoryService.exists(categoryName)) {
+      if (accountService.depositById(accId, amount).isSuccess()) {
+        createAndSaveOperation(operationIdGenerator.nextId(), TxType.INCOME, accId, amount,
+            LocalDateTime.now(), categoryService.categoryId(categoryName));
+      } else {
+        logger.info("Снятие не удалось.");
+      }
     } else {
-      logger.info("Пополнение не удалось");
+      logger.info("Пополнение не удалось. В хранилище отсутствует указанная категория");
     }
   }
 
   public void depositToAccount(String accId, long amount, String categoryName, String description) {
-    if (accountService.depositById(accId, amount).isSuccess() && categoryService.exists(
-        categoryName)) {
-      createAndSaveOperation(operationIdGenerator.nextId(), TxType.INCOME, accId, amount,
-          LocalDateTime.now(), categoryService.categoryId(categoryName), description);
+    if (categoryService.exists(categoryName)) {
+      if (accountService.depositById(accId, amount).isSuccess()) {
+        createAndSaveOperation(operationIdGenerator.nextId(), TxType.INCOME, accId, amount,
+            LocalDateTime.now(), categoryService.categoryId(categoryName), description);
+      } else {
+        logger.info("Снятие не удалось.");
+      }
     } else {
-      logger.info("Пополнение не удалось");
+      logger.info("Пополнение не удалось. В хранилище отсутствует указанная категория");
     }
   }
 
   public void withdrawFromAccount(String accId, long amount, String categoryName) {
-    if (accountService.withdrawById(accId, amount).isSuccess() && categoryService.exists(
-        categoryName)) {
-      createAndSaveOperation(operationIdGenerator.nextId(), TxType.EXPENSE, accId, amount,
-          LocalDateTime.now(), categoryService.categoryId(categoryName));
+    if (categoryService.exists(categoryName)) {
+      if (accountService.withdrawById(accId, amount).isSuccess()) {
+        createAndSaveOperation(operationIdGenerator.nextId(), TxType.EXPENSE, accId, amount,
+            LocalDateTime.now(), categoryService.categoryId(categoryName));
+      } else {
+        logger.info("Снятие не удалось.");
+      }
     } else {
-      logger.info("Снятие не удалось");
+      logger.info("Снятие не удалось. В хранилище отсутствует указанная категория");
     }
   }
 
   public void withdrawFromAccount(String accId, long amount, String categoryName,
       String description) {
-    if (accountService.withdrawById(accId, amount).isSuccess() && categoryService.exists(
-        categoryName)) {
-      createAndSaveOperation(operationIdGenerator.nextId(), TxType.EXPENSE, accId, amount,
-          LocalDateTime.now(), categoryService.categoryId(categoryName), description);
+    if (categoryService.exists(categoryName)) {
+      if (accountService.withdrawById(accId, amount).isSuccess()) {
+        createAndSaveOperation(operationIdGenerator.nextId(), TxType.EXPENSE, accId, amount,
+            LocalDateTime.now(), categoryService.categoryId(categoryName), description);
+      } else {
+        logger.info("Снятие не удалось.");
+      }
     } else {
-      logger.info("Снятие не удалось");
+      logger.info("Снятие не удалось. В хранилище отсутствует указанная категория");
     }
   }
 }

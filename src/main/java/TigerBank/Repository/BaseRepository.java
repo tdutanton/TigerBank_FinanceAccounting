@@ -2,6 +2,7 @@ package TigerBank.Repository;
 
 import TigerBank.Domain.Identifiable.Identifiable;
 import TigerBank.Utils.Logging.Logger;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -44,4 +45,8 @@ public abstract class BaseRepository<T extends Identifiable> {
   }
 
   protected abstract void safetyUpdate(T entity);
+
+  public ArrayList<T> entities() {
+    return new ArrayList<>(storage.values());
+  }
 }

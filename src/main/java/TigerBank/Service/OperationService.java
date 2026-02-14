@@ -1,5 +1,9 @@
 package TigerBank.Service;
 
+import TigerBank.Analytics.DifIncomeExpense;
+import TigerBank.Analytics.MoneyGroup;
+import TigerBank.Analytics.MoneyGroup.Summary;
+import TigerBank.Analytics.MoneySum;
 import TigerBank.Domain.Operation.Operation;
 import TigerBank.Domain.TxType.TxType;
 import TigerBank.Repository.OperationRepository;
@@ -49,5 +53,17 @@ public class OperationService {
   public void deleteOperation(String id) {
     Optional<Operation> operation = repository.findByKey(id);
     operation.ifPresent(repository::delete);
+  }
+
+  public MoneySum calculateDifferenceBetweenThreads(LocalDateTime start, LocalDateTime end) {
+    DifIncomeExpense res = new DifIncomeExpense(repository.entities(), start, end);
+    res.calculate();
+    return res.getResult();
+  }
+
+  public Summary calculateMoneyGroup() {
+    MoneyGroup res = new MoneyGroup(repository.entities());
+    res.calculate();
+    return res.getTotalSummary();
   }
 }
