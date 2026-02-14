@@ -94,7 +94,7 @@ public class CsvFormat implements DataFormat {
 
         if (isHeader) {
           isHeader = false;
-          continue; // пропускаем заголовок
+          continue;
         }
 
         String[] values = parseCsvLine(line);
