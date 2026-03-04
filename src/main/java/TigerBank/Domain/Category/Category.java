@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @EqualsAndHashCode
 @ToString(includeFieldNames = true)
-public class Category implements Identifiable {
+public abstract class Category implements Identifiable {
 
   private final String id;
   private final TxType type;

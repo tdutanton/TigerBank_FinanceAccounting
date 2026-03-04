@@ -30,13 +30,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class Interaction {
 
+  private static final String END_MSG = "< Конец сообщения >%n%n";
   private final Logger logger;
   private final GeneralService bank;
   private final Scanner scanner;
   private final Map<Integer, Runnable> menuActions;
   private final ImportExportService importExportService;
-
-  private static final String END_MSG = "< Конец сообщения >%n%n";
 
   public Interaction(Logger logger, GeneralService bank, Scanner scanner,
       ImportExportService importExportService) {
@@ -408,7 +407,6 @@ public class Interaction {
       PeriodReportDisplay.PrintPeriodReport(start, end, result);
       System.out.printf(END_MSG);
       sw.stop();
-      return;
 
     } catch (IllegalArgumentException e) {
       logger.info(e.getMessage());

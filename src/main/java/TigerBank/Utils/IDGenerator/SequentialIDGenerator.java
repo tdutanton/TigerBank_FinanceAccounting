@@ -1,7 +1,5 @@
 package TigerBank.Utils.IDGenerator;
 
-import org.springframework.stereotype.Component;
-
 public class SequentialIDGenerator implements IDGenerator {
 
   private final String prefix;

@@ -7,12 +7,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class TxTypeDisplay implements Printable {
 
-  private TxType type;
-
   private static final Map<TxType, String> DISPLAY_NAMES = Map.of(
       TxType.INCOME, "Доход",
       TxType.EXPENSE, "Расход"
   );
+  private TxType type;
 
   public static String getDisplayName(TxType type) {
     return DISPLAY_NAMES.get(type);
