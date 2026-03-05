@@ -6,7 +6,15 @@ import lombok.Getter;
 @Getter
 public class IncomeCategoryParam extends CategoryParam {
 
-  public IncomeCategoryParam(String id, TxType type, String name) {
-    super(id, type, name);
+  private final TxType type;
+
+  public IncomeCategoryParam(String id, String name) {
+    super(id, name);
+    type = TxType.INCOME;
+  }
+
+  @Override
+  public TxType getType() {
+    return TxType.INCOME;
   }
 }

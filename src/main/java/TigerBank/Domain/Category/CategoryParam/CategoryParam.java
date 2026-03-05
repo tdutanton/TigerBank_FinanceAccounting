@@ -9,6 +9,7 @@ import lombok.Getter;
 public abstract class CategoryParam {
 
   protected String id;
-  protected TxType type;
   protected String name;
+
+  public abstract TxType getType();
 }

@@ -4,6 +4,9 @@ import TigerBank.Analytics.MoneyGroup.Summary;
 import TigerBank.Analytics.MoneySum;
 import TigerBank.Domain.Account.Account;
 import TigerBank.Domain.Category.Category;
+import TigerBank.Domain.Category.CategoryParam.CategoryParam;
+import TigerBank.Domain.Category.CategoryParam.ExpenseCategoryParam;
+import TigerBank.Domain.Category.CategoryParam.IncomeCategoryParam;
 import TigerBank.Domain.Operation.Operation;
 import TigerBank.Domain.TxType.TxType;
 import TigerBank.Utils.IDGenerator.IDGenerator;
@@ -40,7 +43,11 @@ public class GeneralService {
   }
 
   public void createAndSaveCategory(TxType type, String name) {
-    categoryService.createAndSaveCategory(categoryIdGenerator.nextId(), type, name);
+    CategoryParam param = switch (type) {
+      case EXPENSE -> new ExpenseCategoryParam(categoryIdGenerator.nextId(), name);
+      case INCOME -> new IncomeCategoryParam(categoryIdGenerator.nextId(), name);
+    };
+    categoryService.createAndSaveCategory(param);
   }
 
   public void deleteCategory(String name) {

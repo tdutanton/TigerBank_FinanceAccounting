@@ -4,7 +4,7 @@ import TigerBank.Domain.Category.Category;
 import TigerBank.Domain.Category.CategoryParam.CategoryParam;
 import TigerBank.Factory.CategoryCreator.CategoryCreator;
 import TigerBank.Factory.CategoryFactory.CategoryFactory;
-import java.util.List;
+import TigerBank.Utils.Logging.Logger;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +12,19 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CategoryCreatorImpl implements CategoryCreator {
 
-  private final List<CategoryFactory> factories;
+  private final CategoryFactory factory;
+  private final Logger logger;
 
   @Override
   public Category createCategory(CategoryParam param) {
-    for (CategoryFactory factory : factories) {
-      if (factory.isCategorySupported(param.getType())) {
-        try {
-          return factory.createCategoryWithParam(param);
-        } catch (IllegalArgumentException e) {
-          System.out.printf("Ошибка создания категории: %s%n", e);
-        }
-      }
+    if (!factory.isCategorySupported(param.getType())) {
+      throw new IllegalArgumentException("Тип " + param.getType() + " не поддерживается");
     }
-    throw new IllegalArgumentException(
-        String.format("Тип категории %s не поддерживается сервисом",
-            param.getType()));
+    try {
+      return factory.createCategoryWithParam(param.getId(), param.getType(), param.getName());
+    } catch (IllegalArgumentException e) {
+      logger.info("Ошибка создания категории: " + e.getMessage());
+      throw e;
+    }
   }
 }

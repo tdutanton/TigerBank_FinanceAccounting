@@ -1,12 +1,11 @@
 package TigerBank.Factory.CategoryFactory;
 
 import TigerBank.Domain.Category.Category;
-import TigerBank.Domain.Category.CategoryParam.CategoryParam;
 import TigerBank.Domain.TxType.TxType;
 
 public interface CategoryFactory {
 
-  Category createCategoryWithParam(CategoryParam param);
+  Category createCategoryWithParam(String id, TxType type, String name);
 
   boolean isCategorySupported(TxType type);
 }

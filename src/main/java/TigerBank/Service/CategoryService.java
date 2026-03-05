@@ -1,7 +1,8 @@
 package TigerBank.Service;
 
 import TigerBank.Domain.Category.Category;
-import TigerBank.Domain.TxType.TxType;
+import TigerBank.Domain.Category.CategoryParam.CategoryParam;
+import TigerBank.Factory.CategoryCreator.CategoryCreator;
 import TigerBank.Repository.CategoryRepository;
 import TigerBank.Utils.Logging.Logger;
 import java.util.Optional;
@@ -15,11 +16,12 @@ public class CategoryService {
 
   @Getter
   private final CategoryRepository repository;
+  private final CategoryCreator creator;
   private final Logger logger;
 
-  public void createAndSaveCategory(String id, TxType type, String name) {
+  public void createAndSaveCategory(CategoryParam param) {
     try {
-      Category category = new Category(id, type, name);
+      Category category = creator.createCategory(param);
       repository.add(category);
     } catch (IllegalArgumentException e) {
       logger.info(e.toString());

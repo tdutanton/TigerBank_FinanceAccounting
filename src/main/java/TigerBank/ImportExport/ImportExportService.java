@@ -2,7 +2,11 @@ package TigerBank.ImportExport;
 
 import TigerBank.Domain.Account.BankAccount;
 import TigerBank.Domain.Category.Category;
+import TigerBank.Domain.Category.CategoryParam.CategoryParam;
+import TigerBank.Domain.Category.CategoryParam.ExpenseCategoryParam;
+import TigerBank.Domain.Category.CategoryParam.IncomeCategoryParam;
 import TigerBank.Domain.Operation.Operation;
+import TigerBank.Factory.CategoryCreator.CategoryCreator;
 import TigerBank.Repository.AccountRepository;
 import TigerBank.Repository.CategoryRepository;
 import TigerBank.Repository.OperationRepository;
@@ -21,6 +25,7 @@ public class ImportExportService {
   private final AccountRepository accountRepository;
   private final CategoryRepository categoryRepository;
   private final OperationRepository operationRepository;
+  private final CategoryCreator categoryCreator;
   private final Logger logger;
 
   private final Map<String, DataFormat> formats;
@@ -28,7 +33,7 @@ public class ImportExportService {
   public ImportExportService(
       AccountRepository accountRepository,
       CategoryRepository categoryRepository,
-      OperationRepository operationRepository,
+      OperationRepository operationRepository, CategoryCreator categoryCreator,
       JsonFormat jsonFormat,
       YamlFormat yamlFormat,
       CsvFormat csvFormat,
@@ -36,6 +41,7 @@ public class ImportExportService {
     this.accountRepository = accountRepository;
     this.categoryRepository = categoryRepository;
     this.operationRepository = operationRepository;
+    this.categoryCreator = categoryCreator;
     this.logger = logger;
 
     this.formats = Map.of(
@@ -108,7 +114,11 @@ public class ImportExportService {
 
   private void importCategories(List<CategoryDTO> categories) {
     for (CategoryDTO dto : categories) {
-      Category category = new Category(dto.getId(), dto.getType(), dto.getName());
+      CategoryParam param = switch (dto.getType()) {
+        case EXPENSE -> new ExpenseCategoryParam(dto.getId(), dto.getName());
+        case INCOME -> new IncomeCategoryParam(dto.getId(), dto.getName());
+      };
+      Category category = categoryCreator.createCategory(param);
       if (!categoryRepository.exists(category)) {
         categoryRepository.add(category);
       }

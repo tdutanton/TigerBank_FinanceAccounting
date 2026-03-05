@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString(includeFieldNames = true)
 public class ExpenseCategory extends Category {
 
-  public ExpenseCategory(String id, TxType type, String name) {
-    super(id, type, name);
+  public ExpenseCategory(String id, String name) {
+    super(id, TxType.EXPENSE, name);
   }
 }
