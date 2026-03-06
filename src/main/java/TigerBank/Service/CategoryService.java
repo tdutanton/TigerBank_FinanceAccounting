@@ -1,7 +1,7 @@
 package TigerBank.Service;
 
 import TigerBank.Domain.Category.Category;
-import TigerBank.Domain.Category.CategoryParam.CategoryParam;
+import TigerBank.Domain.TxType.TxType;
 import TigerBank.Factory.CategoryCreator.CategoryCreator;
 import TigerBank.Repository.CategoryRepository;
 import TigerBank.Utils.Logging.Logger;
@@ -19,9 +19,9 @@ public class CategoryService {
   private final CategoryCreator creator;
   private final Logger logger;
 
-  public void createAndSaveCategory(CategoryParam param) {
+  public void createAndSaveCategory(String id, TxType type, String name) {
     try {
-      Category category = creator.createCategory(param);
+      Category category = creator.createCategory(id, type, name);
       repository.add(category);
     } catch (IllegalArgumentException e) {
       logger.info(e.toString());

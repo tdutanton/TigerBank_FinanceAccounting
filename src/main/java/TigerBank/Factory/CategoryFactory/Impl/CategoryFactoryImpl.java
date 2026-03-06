@@ -18,9 +18,4 @@ public class CategoryFactoryImpl implements CategoryFactory {
       default -> throw new IllegalArgumentException("Неподдерживаемый тип: " + type);
     };
   }
-
-  @Override
-  public boolean isCategorySupported(TxType type) {
-    return type == TxType.EXPENSE || type == TxType.INCOME;
-  }
 }

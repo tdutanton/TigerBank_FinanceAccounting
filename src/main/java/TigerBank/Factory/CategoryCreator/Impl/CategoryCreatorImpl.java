@@ -1,7 +1,7 @@
 package TigerBank.Factory.CategoryCreator.Impl;
 
 import TigerBank.Domain.Category.Category;
-import TigerBank.Domain.Category.CategoryParam.CategoryParam;
+import TigerBank.Domain.TxType.TxType;
 import TigerBank.Factory.CategoryCreator.CategoryCreator;
 import TigerBank.Factory.CategoryFactory.CategoryFactory;
 import TigerBank.Utils.Logging.Logger;
@@ -16,12 +16,9 @@ public class CategoryCreatorImpl implements CategoryCreator {
   private final Logger logger;
 
   @Override
-  public Category createCategory(CategoryParam param) {
-    if (!factory.isCategorySupported(param.getType())) {
-      throw new IllegalArgumentException("Тип " + param.getType() + " не поддерживается");
-    }
+  public Category createCategory(String id, TxType type, String name) {
     try {
-      return factory.createCategoryWithParam(param.getId(), param.getType(), param.getName());
+      return factory.createCategoryWithParam(id, type, name);
     } catch (IllegalArgumentException e) {
       logger.info("Ошибка создания категории: " + e.getMessage());
       throw e;

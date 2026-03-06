@@ -2,9 +2,6 @@ package TigerBank.ImportExport;
 
 import TigerBank.Domain.Account.BankAccount;
 import TigerBank.Domain.Category.Category;
-import TigerBank.Domain.Category.CategoryParam.CategoryParam;
-import TigerBank.Domain.Category.CategoryParam.ExpenseCategoryParam;
-import TigerBank.Domain.Category.CategoryParam.IncomeCategoryParam;
 import TigerBank.Domain.Operation.Operation;
 import TigerBank.Factory.CategoryCreator.CategoryCreator;
 import TigerBank.Repository.AccountRepository;
@@ -114,11 +111,7 @@ public class ImportExportService {
 
   private void importCategories(List<CategoryDTO> categories) {
     for (CategoryDTO dto : categories) {
-      CategoryParam param = switch (dto.getType()) {
-        case EXPENSE -> new ExpenseCategoryParam(dto.getId(), dto.getName());
-        case INCOME -> new IncomeCategoryParam(dto.getId(), dto.getName());
-      };
-      Category category = categoryCreator.createCategory(param);
+      Category category = categoryCreator.createCategory(dto.getId(), dto.getType(), dto.getName());
       if (!categoryRepository.exists(category)) {
         categoryRepository.add(category);
       }

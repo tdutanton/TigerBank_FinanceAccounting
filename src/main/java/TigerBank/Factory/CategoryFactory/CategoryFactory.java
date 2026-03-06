@@ -6,6 +6,4 @@ import TigerBank.Domain.TxType.TxType;
 public interface CategoryFactory {
 
   Category createCategoryWithParam(String id, TxType type, String name);
-
-  boolean isCategorySupported(TxType type);
 }

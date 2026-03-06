@@ -6,7 +6,7 @@ import TigerBank.Analytics.MoneyGroup.Summary;
 import TigerBank.Analytics.MoneySum;
 import TigerBank.Domain.Operation.Operation;
 import TigerBank.Domain.TxType.TxType;
-import TigerBank.Factory.OperationFactory.OperationFactory;
+import TigerBank.Factory.OperationCreator.OperationCreator;
 import TigerBank.Repository.OperationRepository;
 import TigerBank.Utils.Logging.Logger;
 import java.time.LocalDateTime;
@@ -21,7 +21,7 @@ public class OperationService {
 
   @Getter
   private final OperationRepository repository;
-  private final OperationFactory factory;
+  private final OperationCreator creator;
   private final Logger logger;
 
   public void createAndSaveOperation(String id,
@@ -32,7 +32,8 @@ public class OperationService {
       String categoryId,
       String description) {
     try {
-      Operation operation = factory.create(id, type, bankAccountId, amount, date, categoryId,
+      Operation operation = creator.createOperation(id, type, bankAccountId, amount, date,
+          categoryId,
           description);
       repository.add(operation);
     } catch (IllegalArgumentException e) {
@@ -47,7 +48,8 @@ public class OperationService {
       LocalDateTime date,
       String categoryId) {
     try {
-      Operation operation = factory.create(id, type, bankAccountId, amount, date, categoryId);
+      Operation operation = creator.createOperation(id, type, bankAccountId, amount, date,
+          categoryId);
       repository.add(operation);
     } catch (IllegalArgumentException e) {
       logger.info(e.toString());
