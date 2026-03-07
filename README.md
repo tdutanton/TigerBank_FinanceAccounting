@@ -204,34 +204,10 @@ public interface DataFormat {
 [пополнение]3.24мс
 ```
 
-### Почему архитектурные решения улучшили дизайн
-
-1. Интерфейс Calculatable  
-   Позволяет добавлять новые типы аналитики без изменения ядра:
-
-```java
-public interface Calculatable {
-
-  void calculate();
-} 
-```
-
-2. Единый интерфейс DataFormat  
-   Новые форматы (XML, Protobuf) добавляются без изменения ImportExportService.
-
-3. Репозитории через BaseRepository<T>
-   Единая логика хранения для всех сущностей с возможностью замены реализации (БД → файлы).
-
-4. Валидация в конструкторах доменных классов
-   Гарантирует неизменяемость и корректность состояния на уровне модели, а не сервисов.
-
 ### Ситуации, при которых появятся проблемы добавления нового функционала или расширении бизнес-логики
 
-- Необходимость добавления операций расчета скорости выполнения процедур;
-- Сложность реализации вывода информации в output различных типов, а также в консоль (не до конца
-  реализовано применение интерфейса Printable пакета Presentation);
-- Возможность напрямую изменять объекты доменных классов через геттеры репозиториев;
-- Имеется зависимость не от абстракций, а конкретных классов.
+- Сложность и дублирование кода в создании новых команд в пакете Command.
+- До конца не доработан шаблон работы с разными форматами данных.
 
 ### Сборка и запуск
 
@@ -256,35 +232,34 @@ public interface Calculatable {
 ### Структура проекта
 
 ```bash
-└───src  
-├───main  
-│   └───java  
-│       └───TigerBank  
-│           ├───Analytics  
-│           ├───Config  
-│           ├───Domain  
-│           │   ├───Account  
-│           │   ├───Category  
-│           │   ├───Identifiable  
-│           │   ├───Operation  
-│           │   └───TxType  
-│           ├───ImportExport  
-│           ├───Interaction  
-│           ├───Presentation  
-│           ├───Repository  
-│           ├───Service  
-│           └───Utils  
-│               ├───IDGenerator  
-│               ├───Logging  
-│               └───Stopwatch  
-└───test  
-└───java  
-└───TigerBank  
-└───Domain  
-├───Account  
-├───Category  
-├───Operation  
-└───TxType  
+└───TigerBank
+    ├───Analytics
+    ├───Config
+    ├───Domain
+    │   ├───Account
+    │   ├───Category
+    │   ├───Identifiable
+    │   ├───Operation
+    │   └───TxType
+    ├───Factory
+    │   ├───CategoryCreator
+    │   │   └───Impl
+    │   ├───CategoryFactory
+    │   │   └───Impl
+    │   ├───OperationCreator
+    │   │   └───Impl
+    │   └───OperationFactory
+    ├───ImportExport
+    ├───Interaction
+    │   └───Command
+    │       └───Impl
+    ├───Presentation
+    ├───Repository
+    ├───Service
+    └───Utils
+        ├───IDGenerator
+        ├───Logging
+        └───Stopwatch
 ```
 
 ### Автор: Anton Evgenev. tg: @tdutanton
