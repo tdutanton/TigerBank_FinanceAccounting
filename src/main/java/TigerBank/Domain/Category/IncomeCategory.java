@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-@ToString(includeFieldNames = true)
+@ToString(callSuper = true, includeFieldNames = false)
 public class IncomeCategory extends Category {
 
   public IncomeCategory(String id, String name) {
